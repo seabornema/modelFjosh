@@ -165,3 +165,10 @@ function thermalize(state, arrays, m², N)
         deterministic(state, arrays...)
     end
 end
+
+
+function pre_thermalize(state, m², N)
+    for _ in 1:N
+        dissipative(state, m²)
+    end
+end
