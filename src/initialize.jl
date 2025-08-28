@@ -17,6 +17,18 @@ function parse_commandline()
             help = "size of time step"
             arg_type = Float64
             default = 0.04
+        "--imG"
+            help = "im Gamma"
+            arg_type = Float64
+            default = 1.0
+        "--gamma0"
+            help = "coupling between the energy mode and the order parameter"
+            arg_type = Float64
+            default = 1.0
+        "--g0"
+            help = "mode coupling"
+            arg_type = Float64
+            default = 1.0
         "--rng"
             help = "seed for random number generation"
             arg_type = Int
@@ -50,14 +62,15 @@ const ArrayType = cpu ? Array : CuArray
 const SubArrayType = cpu ? SubArray : CuArray
 
 const λ = FloatType(4.0)
-const Γ = ComplexType(1.0 + 1.0im)
+const imG = FloatType(parsed_args["imG"] )
+const Γ = ComplexType(1.0 + 1.0im*imG)
 const κ = FloatType(1.0)
 const T = FloatType(1.0)
 
 const L = parsed_args["size"]
-const γ0 = FloatType(1.0)
+const γ0 = FloatType(parsed_args["gamma0"])
 const C0 = FloatType(1.0)
-const g0 = FloatType(1.0)
+const g0 = FloatType(parsed_args["g0"])
 const m² = FloatType(parsed_args["mass"])
 const Δt = FloatType(parsed_args["dt"]/real(Γ))
 
