@@ -148,7 +148,7 @@ end
 
 function dissipative(state, m²)
     # psi update
-    for n in 0:1, m in 0:1
+    for n in 0:2, m in 0:1
         psi_sweep(state.ψ, state.ϕ, n, m)
     end
 
